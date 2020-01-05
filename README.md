@@ -1,3 +1,7 @@
+<div align="left">
+<img src="./pic/logo.png" height="80px" alt="MyBatisCN" >
+</div>
+
 # [MyBatisCN](https://github.com/yeecode/MyBatisCN)
 
 最新Mybatis的源码注解版，源码来自[mybatis-3 稳定版 3.5.2](https://github.com/mybatis/mybatis-3/releases/tag/mybatis-3.5.2)。
