@@ -18,12 +18,12 @@
 
 本书适合架构师、程序员提升自己的源码阅读能力、系统架构能力、软件开发能力，也有助于产品经理、测试人员、运维人员等从业者了解软件架构细节。
 
-**书籍购买地址：** [**京东**](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEaBFQeWBwyVlgNRQQlW1dCFFlQCxxKQgFHREkdSVJKSQVJHFRXFk9FUlpGQUpLCVBaTFhbXQtWVmpSWRtYHQETAlYSax10SA8XeytMZ0xfIFkkVQEMQD1HC0MOHjdUK1sUAxIDXB1TFwIiN1Uca0NsEgZUGloUBxICVitaJQIWD1AZUxQCEg5VE1glBRIOZUAOewQaVAcfDh0FEQVUGVklMiIEZStrFTIRNxd1DEUDFFRcGF4XUEUGUBoJRVFCA1QdXhEAGlRXSFhCABQ3VxpaEQs%3D) | [**天猫**](https://s.click.taobao.com/fYrflyu) 
+**书籍购买地址：** [**京东**](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEaBFQeWBwyVlgNRQQlW1dCFFlQCxxKQgFHREkdSVJKSQVJHFRXFk9FUlpGQUpLCVBaTFhbXQtWVmpSWRtYHQETAlYSax10SA8XeytMZ0xfIFkkVQEMQD1HC0MOHjdUK1sUAxIDXB1TFwIiN1Uca0NsEgZUGloUBxICVitaJQIWD1AZUxQCEg5VE1glBRIOZUAOewQaVAcfDh0FEQVUGVklMiIEZStrFTIRNxd1DEUDFFRcGF4XUEUGUBoJRVFCA1QdXhEAGlRXSFhCABQ3VxpaEQs%3D) | [**淘宝**](https://s.click.taobao.com/fYrflyu) 
 
 
 ![书籍介绍](./pic/book_info.jpg)
 
-**书籍购买地址：** [**京东**](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEaBFQeWBwyVlgNRQQlW1dCFFlQCxxKQgFHREkdSVJKSQVJHFRXFk9FUlpGQUpLCVBaTFhbXQtWVmpSWRtYHQETAlYSax10SA8XeytMZ0xfIFkkVQEMQD1HC0MOHjdUK1sUAxIDXB1TFwIiN1Uca0NsEgZUGloUBxICVitaJQIWD1AZUxQCEg5VE1glBRIOZUAOewQaVAcfDh0FEQVUGVklMiIEZStrFTIRNxd1DEUDFFRcGF4XUEUGUBoJRVFCA1QdXhEAGlRXSFhCABQ3VxpaEQs%3D) | [**天猫**](https://s.click.taobao.com/fYrflyu) 
+**书籍购买地址：** [**京东**](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEaBFQeWBwyVlgNRQQlW1dCFFlQCxxKQgFHREkdSVJKSQVJHFRXFk9FUlpGQUpLCVBaTFhbXQtWVmpSWRtYHQETAlYSax10SA8XeytMZ0xfIFkkVQEMQD1HC0MOHjdUK1sUAxIDXB1TFwIiN1Uca0NsEgZUGloUBxICVitaJQIWD1AZUxQCEg5VE1glBRIOZUAOewQaVAcfDh0FEQVUGVklMiIEZStrFTIRNxd1DEUDFFRcGF4XUEUGUBoJRVFCA1QdXhEAGlRXSFhCABQ3VxpaEQs%3D) | [**淘宝**](https://s.click.taobao.com/fYrflyu) 
 
 书籍目录：
 
@@ -311,4 +311,4 @@
     - 26.4 Dubbo
     - 26.5 React
 
-**书籍购买地址：** [**京东**](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEaBFQeWBwyVlgNRQQlW1dCFFlQCxxKQgFHREkdSVJKSQVJHFRXFk9FUlpGQUpLCVBaTFhbXQtWVmpSWRtYHQETAlYSax10SA8XeytMZ0xfIFkkVQEMQD1HC0MOHjdUK1sUAxIDXB1TFwIiN1Uca0NsEgZUGloUBxICVitaJQIWD1AZUxQCEg5VE1glBRIOZUAOewQaVAcfDh0FEQVUGVklMiIEZStrFTIRNxd1DEUDFFRcGF4XUEUGUBoJRVFCA1QdXhEAGlRXSFhCABQ3VxpaEQs%3D) | [**天猫**](https://s.click.taobao.com/fYrflyu) 
+**书籍购买地址：** [**京东**](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEaBFQeWBwyVlgNRQQlW1dCFFlQCxxKQgFHREkdSVJKSQVJHFRXFk9FUlpGQUpLCVBaTFhbXQtWVmpSWRtYHQETAlYSax10SA8XeytMZ0xfIFkkVQEMQD1HC0MOHjdUK1sUAxIDXB1TFwIiN1Uca0NsEgZUGloUBxICVitaJQIWD1AZUxQCEg5VE1glBRIOZUAOewQaVAcfDh0FEQVUGVklMiIEZStrFTIRNxd1DEUDFFRcGF4XUEUGUBoJRVFCA1QdXhEAGlRXSFhCABQ3VxpaEQs%3D) | [**淘宝**](https://s.click.taobao.com/fYrflyu) 
