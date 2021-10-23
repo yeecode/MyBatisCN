@@ -193,7 +193,7 @@ public class Reflector {
   private void resolveSetterConflicts(Map<String, List<Method>> conflictingSetters) {
     for (String propName : conflictingSetters.keySet()) {
       List<Method> setters = conflictingSetters.get(propName);
-      // 这里再设置getMethods时已经设置好了
+      // 这里在设置getMethods时已经设置好了
       Class<?> getterType = getTypes.get(propName);
       Method match = null;
       ReflectionException exception = null;
@@ -232,7 +232,7 @@ public class Reflector {
     Class<?> paramType1 = setter1.getParameterTypes()[0];
     Class<?> paramType2 = setter2.getParameterTypes()[0];
     if (paramType1.isAssignableFrom(paramType2)) {
-      // 父类的那个为准
+      // 子类的那个为准
       return setter2;
     } else if (paramType2.isAssignableFrom(paramType1)) {
       return setter1;
