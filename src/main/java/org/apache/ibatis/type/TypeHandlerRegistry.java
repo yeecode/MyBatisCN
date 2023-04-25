@@ -61,7 +61,7 @@ public final class TypeHandlerRegistry {
   private final TypeHandler<Object> unknownTypeHandler = new UnknownTypeHandler(this);
   // 键为typeHandler.getClass() ，值为typeHandler。里面存储了所有的类型处理器
   private final Map<Class<?>, TypeHandler<?>> allTypeHandlersMap = new HashMap<>();
-  // 空的Map<JdbcType, TypeHandler<?>>，表示该Javal类型没有对应的Map<JdbcType, TypeHandler<?>>
+  // 空的Map<JdbcType, TypeHandler<?>>，表示该Java类型没有对应的Map<JdbcType, TypeHandler<?>>
   private static final Map<JdbcType, TypeHandler<?>> NULL_TYPE_HANDLER_MAP = Collections.emptyMap();
   // 默认的枚举类型处理器
   private Class<? extends TypeHandler> defaultEnumTypeHandler = EnumTypeHandler.class;

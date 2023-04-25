@@ -40,6 +40,8 @@ import org.apache.ibatis.reflection.invoker.SetFieldInvoker;
 import org.apache.ibatis.reflection.property.PropertyNamer;
 
 /**
+ * 此类表示一组缓存的类定义信息，允许在属性名称和 getter/setter 方法之间轻松映射。
+ *
  * This class represents a cached set of class definition information that
  * allows for easy mapping between property names and getter/setter methods.
  *
@@ -59,7 +61,7 @@ public class Reflector {
   private final Map<String, Invoker> getMethods = new HashMap<>();
   // set方法输入类型。键为属性名，值为对应的该属性的set方法的类型（实际为set方法的第一个参数的类型）
   private final Map<String, Class<?>> setTypes = new HashMap<>();
-  // get方法输出类型。键为属性名，值为对应的该属性的set方法的类型（实际为set方法的返回值类型）
+  // get方法输出类型。键为属性名，值为对应的该属性的get方法的类型（实际为get方法的返回值类型）
   private final Map<String, Class<?>> getTypes = new HashMap<>();
   // 默认构造函数
   private Constructor<?> defaultConstructor;
@@ -111,9 +113,11 @@ public class Reflector {
     
     // 找出该类中所有的方法
     Method[] methods = getClassMethods(clazz);
+
     // 过滤出get方法，过滤条件有：无入参、符合Java Bean的命名规则；然后取出方法对应的属性名、方法，放入conflictingGetters
     Arrays.stream(methods).filter(m -> m.getParameterTypes().length == 0 && PropertyNamer.isGetter(m.getName()))
       .forEach(m -> addMethodConflict(conflictingGetters, PropertyNamer.methodToProperty(m.getName()), m));
+
     // 如果一个属性有多个疑似get方法，resolveGetterConflicts用来找出合适的那个
     resolveGetterConflicts(conflictingGetters);
   }
@@ -316,6 +320,9 @@ public class Reflector {
   }
 
   /**
+   * 此方法返回一个数组，其中包含在此类和任何超类中声明的所有方法。
+   * 我们使用这个方法，而不是更简单的Class.getMethods() ，因为我们也想寻找私有方法。
+   *
    * This method returns an array containing all methods
    * declared in this class and any superclass.
    * We use this method, instead of the simpler <code>Class.getMethods()</code>,
@@ -330,6 +337,7 @@ public class Reflector {
     while (currentClass != null && currentClass != Object.class) {
       addUniqueMethods(uniqueMethods, currentClass.getDeclaredMethods());
 
+      // 我们还需要寻找接口方法，因为类可能是抽象的
       // we also need to look for interface methods -
       // because the class may be abstract
       Class<?>[] interfaces = currentClass.getInterfaces();
@@ -374,8 +382,9 @@ public class Reflector {
   }
 
   /**
+   * 检查是否可以控制成员访问。
+   * 
    * Checks whether can control member accessible.
-   *
    * @return If can control member accessible, it return {@literal true}
    * @since 3.5.0
    */
