@@ -39,9 +39,9 @@ public class DefaultReflectorFactory implements ReflectorFactory {
   }
 
   /**
-   * 生产Reflector对象
+   * 生产 Reflector 对象
    * @param type 目标类型
-   * @return 目标类型的Reflector对象
+   * @return 目标类型的 Reflector 对象
    */
   @Override
   public Reflector findForClass(Class<?> type) {
