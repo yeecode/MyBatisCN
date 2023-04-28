@@ -18,6 +18,7 @@ package org.apache.ibatis.reflection.invoker;
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ * 针对于 Class 中 Field 和 Method 的调用，在 MyBatis 中封装了 Invoker 对象来统一处理(有使用到适配器模式)。
  * @author Clinton Begin
  */
 public interface Invoker {
