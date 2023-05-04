@@ -27,6 +27,9 @@ import org.apache.ibatis.reflection.invoker.MethodInvoker;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
 
 /**
+ * 在 Reflector 中可以针对普通的属性操作，但是如果出现了比较复杂的属性，比如 private Person person;
+ * 这种，我们要查找的表达式 person.userName. 针对这种表达式的处理，这时就可以通过 MetaClass 来处理了。
+ * 通过 Reflector 和 ReflectorFactory 的组合使用 实现对复杂的属性表达式的解析.
  * @author Clinton Begin
  */
 public class MetaClass {
@@ -134,6 +137,12 @@ public class MetaClass {
     return null;
   }
 
+
+  /**
+   * 判断是否有指定属性的 setter 方法或者指定属性
+   * @param name
+   * @return
+   */
   public boolean hasSetter(String name) {
     PropertyTokenizer prop = new PropertyTokenizer(name);
     if (prop.hasNext()) {
@@ -148,6 +157,12 @@ public class MetaClass {
     }
   }
 
+
+  /**
+   * 判断是否有指定属性的 getter 方法或者指定属性
+   * @param name
+   * @return
+   */
   public boolean hasGetter(String name) {
     PropertyTokenizer prop = new PropertyTokenizer(name);
     if (prop.hasNext()) {
