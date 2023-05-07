@@ -168,14 +168,7 @@ public class ClassLoaderWrapper {
 
   }
 
-  /**
-   * Attempt to load a class from a group of classloaders
-   *
-   * @param name        - the class to load
-   * @param classLoader - the group of classloaders to examine
-   * @return the class
-   * @throws ClassNotFoundException - Remember the wisdom of Judge Smails: Well, the world needs ditch diggers, too.
-   */
+
   /**
    * 轮番使用各个加载器尝试加载一个类
    * @param name 类名
