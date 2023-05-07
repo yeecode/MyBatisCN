@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
+ * 一个类来包装对多个类加载器的访问，使它们作为一个类加载器工作
+ *
  * A class to wrap access to multiple class loaders making them work as one
  *
  * @author Clinton Begin
@@ -79,8 +81,9 @@ public class ClassLoaderWrapper {
   }
 
   /**
-   * Find a class on the classpath (or die trying)
+   * 在类路径上找到一个类（或死于尝试）
    *
+   * Find a class on the classpath (or die trying)
    * @param name - the class to look for
    * @return - the class
    * @throws ClassNotFoundException Duh.

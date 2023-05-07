@@ -27,6 +27,7 @@ import java.util.Properties;
 
 /**
  * 通过类加载器简化对资源访问的类。
+ *
  * A class to simplify access to resources through the classloader.
  *
  * @author Clinton Begin
@@ -36,8 +37,8 @@ public class Resources {
   private static ClassLoaderWrapper classLoaderWrapper = new ClassLoaderWrapper();
 
   /**
-   * Charset to use when calling getResourceAsReader.
-   * null means use the system default.
+   * 调用 getResourceAsReader 时使用的字符集，null 表示使用系统默认值。
+   * Charset to use when calling getResourceAsReader, null means use the system default.
    */
   private static Charset charset;
 
@@ -63,6 +64,8 @@ public class Resources {
   }
 
   /**
+   * 返回类路径上资源的 URL
+   *
    * Returns the URL of the resource on the classpath
    *
    * @param resource The resource to find

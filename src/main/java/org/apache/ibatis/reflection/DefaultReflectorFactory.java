@@ -39,15 +39,14 @@ public class DefaultReflectorFactory implements ReflectorFactory {
   }
 
   /**
-   * 生产Reflector对象
+   * 生产 Reflector 对象
    * @param type 目标类型
-   * @return 目标类型的Reflector对象
+   * @return 目标类型的 Reflector 对象
    */
   @Override
   public Reflector findForClass(Class<?> type) {
     if (classCacheEnabled) { // 允许缓存
-      // 生产入参type的反射器对象，并放入缓存
-      return reflectorMap.computeIfAbsent(type, Reflector::new);
+      return reflectorMap.computeIfAbsent(type, Reflector::new); // 生产入参type的反射器对象，并放入缓存
     } else {
       return new Reflector(type);
     }

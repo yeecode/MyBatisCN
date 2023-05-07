@@ -25,18 +25,18 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 
 /**
- * <p>ResolverUtil is used to locate classes that are available in the/a class path and meet
- * arbitrary conditions. The two most common conditions are that a class implements/extends
- * another class, or that is it annotated with a specific annotation. However, through the use
- * of the {@link Test} class it is possible to search using arbitrary conditions.</p>
- *
- * ResolverUtil 用来定位某个class路径下满足任意条件的类们。通常的筛选条件是：
+ * <p>ResolverUtil 用来定位某个class路径下满足任意条件的类们。通常的筛选条件是：<p/>
+ * <pre>
  * 类继承了某个接口
  * 实现了某个类
  * 类拥有可定的注解
  * 基于Test类可以用来判断某各类是否满足这些条件
+ * </pre>
  *
- *
+ * <p>ResolverUtil is used to locate classes that are available in the/a class path and meet
+ * arbitrary conditions. The two most common conditions are that a class implements/extends
+ * another class, or that is it annotated with a specific annotation. However, through the use
+ * of the {@link Test} class it is possible to search using arbitrary conditions.</p>
  *
  * <p>A ClassLoader is used to locate all locations (directories and jar files) in the class
  * path that contain classes within certain packages, and then to load those classes and
@@ -71,6 +71,8 @@ public class ResolverUtil<T> {
   private static final Log log = LogFactory.getLog(ResolverUtil.class);
 
   /**
+   * Test是一个筛选器，内部有一个抽象方法 matches 来判断指定类是否满足筛选条件。
+   *
    * A simple interface that specifies how to test classes to determine if they
    * are to be included in the results produced by the ResolverUtil.
    */
@@ -94,7 +96,10 @@ public class ResolverUtil<T> {
       this.parent = parentType;
     }
 
-    /** Returns true if type is assignable to the parent type supplied in the constructor. */
+    /**
+     * IsA类中的 matches方法可以判断目标类是否实现了某个接口或者继承了某个类
+     * Returns true if type is assignable to the parent type supplied in the constructor.
+     * */
     @Override
     public boolean matches(Class<?> type) {
       return type != null && parent.isAssignableFrom(type);
@@ -118,7 +123,10 @@ public class ResolverUtil<T> {
       this.annotation = annotation;
     }
 
-    /** Returns true if the type is annotated with the class provided to the constructor. */
+    /**
+     * AnnotatedWith类中的 matches方法可以判断目标类是否具有某个注解。
+     * Returns true if the type is annotated with the class provided to the constructor.
+     * */
     @Override
     public boolean matches(Class<?> type) {
       return type != null && type.isAnnotationPresent(annotation);
@@ -211,6 +219,7 @@ public class ResolverUtil<T> {
     return this;
   }
 
+
   /**
    * Scans for classes starting at the package provided and descending into subpackages.
    * Each class is offered up to the Test as it is discovered, and if the Test returns
@@ -285,8 +294,7 @@ public class ResolverUtil<T> {
         matches.add((Class<T>) type);
       }
     } catch (Throwable t) {
-      log.warn("Could not examine class '" + fqn + "'" + " due to a " +
-          t.getClass().getName() + " with message: " + t.getMessage());
+      log.warn("Could not examine class '" + fqn + "'" + " due to a " + t.getClass().getName() + " with message: " + t.getMessage());
     }
   }
 }

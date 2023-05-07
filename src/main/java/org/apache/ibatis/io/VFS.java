@@ -28,6 +28,8 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 
 /**
+ * 提供一个非常简单的 API，用于访问应用程序服务器中的资源。
+ *
  * Provides a very simple API for accessing resources within an application server.
  *
  * @author Ben Gunter
@@ -35,10 +37,16 @@ import org.apache.ibatis.logging.LogFactory;
 public abstract class VFS {
   private static final Log log = LogFactory.getLog(VFS.class);
 
-  /** The built-in implementations. */
+  /**
+   * 存储内置的VFS(虚拟文件系统)实现类
+   * The built-in implementations.
+   **/
   public static final Class<?>[] IMPLEMENTATIONS = { JBoss6VFS.class, DefaultVFS.class };
 
-  /** The list to which implementations are added by {@link #addImplClass(Class)}. */
+  /**
+   * 存储用户自定义的VFS(虚拟文件系统)实现类
+   * The list to which implementations are added by {@link #addImplClass(Class)}.
+   * */
   public static final List<Class<? extends VFS>> USER_IMPLEMENTATIONS = new ArrayList<>();
 
   /** Singleton instance holder. */
@@ -48,6 +56,8 @@ public abstract class VFS {
 
     /**
      * 给出一个VFS实现。单例模式
+     * 先组建一个 VFS实现类的 列表，然后依次对列表中的实现类进行校验。第一个通过校验的实现 即被选中。
+     * 在组建列表时，用户自定义的实现类放在了列表的前部，这保证了用户自定义的实现类具有更高的优先级。
      * @return VFS实现
      */
     static VFS createVFS() {
@@ -64,11 +74,9 @@ public abstract class VFS {
         try {
           // 生成一个实现类的对象
           vfs = impl.newInstance();
-          // 判断对象是否生成成功并可用
-          if (vfs == null || !vfs.isValid()) {
+          if (vfs == null || !vfs.isValid()) { // 判断对象是否生成成功并可用
             if (log.isDebugEnabled()) {
-              log.debug("VFS implementation " + impl.getName() +
-                  " is not valid in this environment.");
+              log.debug("VFS implementation " + impl.getName() + " is not valid in this environment.");
             }
           }
         } catch (InstantiationException | IllegalAccessException e) {
@@ -94,6 +102,8 @@ public abstract class VFS {
   }
 
   /**
+   * 将指定的类添加到VFS实现列表中。以这种方式添加的类按照添加顺序和任何内置实现之前进行尝试。
+   *
    * Adds the specified class to the list of {@link VFS} implementations. Classes added in this
    * manner are tried in the order they are added and before any of the built-in implementations.
    *

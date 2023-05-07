@@ -20,7 +20,7 @@ import java.lang.reflect.Type;
 
 /**
  *
- * 类型处理程序。
+ * 类型处理程序: 如果在遇到一个 TypeHandler 时，却不知道它到底是用来处理哪一种 Java 类型的处理器时，那么 TypeReference 的作用就出来了。它能判断出一个 TypeHandler 用来处理的目标类型。
  * References a generic type.
  *
  * @param <T> the referenced type
@@ -51,8 +51,7 @@ public abstract class TypeReference<T> {
         return getSuperclassTypeParameter(clazz.getSuperclass());
       }
       // 说明clazz实现了TypeReference类，但是却没有使用泛型
-      throw new TypeException("'" + getClass() + "' extends TypeReference but misses the type parameter. "
-        + "Remove the extension or add a type parameter to it.");
+      throw new TypeException("'" + getClass() + "' extends TypeReference but misses the type parameter. " + "Remove the extension or add a type parameter to it.");
     }
 
     // 运行到这里说明genericSuperclass是泛型类。获取泛型的第一个参数，即T

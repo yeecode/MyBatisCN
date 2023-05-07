@@ -35,6 +35,8 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 
 /**
+ * 适用于大多数应用程序服务器的VFS的默认实现。
+ *
  * A default implementation of {@link VFS} that works for most application servers.
  *
  * @author Ben Gunter
