@@ -47,7 +47,7 @@ public class SqlSourceBuilder extends BaseBuilder {
   // 这里解析的对象是SqlNode拼接结束的，即<if> <where>等节点的结果都已经解析结束。然后在这里继续处理
 
   /**
-   * 将DynamicSqlSource和RawSqlSource中的“#{}”符号替换掉，从而将他们转化为StaticSqlSource
+   * 将 DynamicSqlSource 和 RawSqlSource 中的 “#{}” 符号替换掉，从而将他们转化为 StaticSqlSource。
    * @param originalSql sqlNode.apply()拼接之后的sql语句。已经不包含<if> <where>等节点，也不含有${}符号
    * @param parameterType 实参类型
    * @param additionalParameters 附加参数
