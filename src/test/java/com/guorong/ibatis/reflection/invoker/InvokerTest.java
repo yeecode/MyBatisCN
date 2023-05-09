@@ -5,11 +5,11 @@ import org.apache.ibatis.reflection.Reflector;
 import org.apache.ibatis.reflection.invoker.Invoker;
 import org.junit.jupiter.api.Test;
 
-public class InvokerTest {
+class InvokerTest {
 
 
     @Test
-    public void test() throws Exception {
+    void test() throws Exception {
         Reflector reflector = new DefaultReflectorFactory().findForClass(Person.class);
         // 通过默认构造器创建对象
         Object object = reflector.getDefaultConstructor().newInstance();
@@ -26,9 +26,11 @@ public class InvokerTest {
             System.out.println(String.format("getName() 执行了...."));
             return "hello";
         }
+
         public void setName(String name) {
             System.out.println(String.format("setName() 执行了...."));
         }
+
         public void sayHello() {
             System.out.println("sayHello() 执行了....");
         }

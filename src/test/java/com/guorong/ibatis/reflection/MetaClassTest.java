@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  * 这种，我们要查找的表达式 person.userName.针对这种表达式的处理，这时就可以通过MetaClass来处理了。
  * 通过 Reflector 和 ReflectorFactory 的组合使用 实现对复杂的属性表达式的解析
  */
-public class MetaClassTest {
+class MetaClassTest {
 
     @Test
     public void test() {
