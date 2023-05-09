@@ -52,7 +52,6 @@ import org.apache.ibatis.io.Resources;
  * @author Kazuki Shimizu
  */
 public final class TypeHandlerRegistry {
-
   // JDBC类型与对应类型处理器的映射
   private final Map<JdbcType, TypeHandler<?>>  jdbcTypeHandlerMap = new EnumMap<>(JdbcType.class);
   // Java类型与Map<JdbcType, TypeHandler<?>>的映射
@@ -230,12 +229,11 @@ public final class TypeHandlerRegistry {
       return null;
     }
 
-    // 先根据Java类型找到对应的jdbcHandlerMap
+    // 先根据Java类型找到对应的 jdbcHandlerMap
     Map<JdbcType, TypeHandler<?>> jdbcHandlerMap = getJdbcHandlerMap(type);
     TypeHandler<?> handler = null;
-    if (jdbcHandlerMap != null) { // 存在jdbcHandlerMap
-      // 根据JDBC类型找寻对应的处理器
-      handler = jdbcHandlerMap.get(jdbcType);
+    if (jdbcHandlerMap != null) { // 存在 jdbcHandlerMap
+      handler = jdbcHandlerMap.get(jdbcType); // 根据JDBC类型找寻对应的处理器
       if (handler == null) {
         // 使用null作为键进行一次找寻，通过本类源码可知当前jdbcHandlerMap可能是EnumMap也可能是HashMap
         // EnumMap不允许键为null，因此总是返回null。HashMap允许键为null。这是这并不是一次无用功

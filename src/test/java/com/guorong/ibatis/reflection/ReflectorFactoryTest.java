@@ -5,10 +5,10 @@ import org.apache.ibatis.reflection.Reflector;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ReflectorFactoryTest {
+class ReflectorFactoryTest {
 
     @Test
-    public void testCacheIsTrue() {
+    void testCacheIsTrue() {
         DefaultReflectorFactory reflectorFactory = new DefaultReflectorFactory();
         Reflector oneReflector = reflectorFactory.findForClass(Object.class);
         Reflector twoReflector = reflectorFactory.findForClass(Object.class);
@@ -17,7 +17,7 @@ public class ReflectorFactoryTest {
 
 
     @Test
-    public void testCacheIsFalse() {
+    void testCacheIsFalse() {
         DefaultReflectorFactory reflectorFactory = new DefaultReflectorFactory();
         reflectorFactory.setClassCacheEnabled(Boolean.FALSE);
         Reflector oneReflector = reflectorFactory.findForClass(Object.class);

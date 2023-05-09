@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class ReflectorTest {
 
     @Test
-    public void test01() {
+    void test01() {
         Reflector reflector = new Reflector(Person.class);
         String[] propertyNames = reflector.getGetablePropertyNames();
         Class<?> clazz = reflector.getSetterType("id");

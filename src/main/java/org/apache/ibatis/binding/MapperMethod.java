@@ -51,13 +51,12 @@ public class MapperMethod {
   // 对应的方法签名
   private final MethodSignature method;
 
-  // 参数： 方法所在的接口、方法、Configuration
 
   /**
-   * MapperMethod的构造方法
+   * MapperMethod 的构造方法
    * @param mapperInterface 映射接口
    * @param method 映射接口中的具体方法
-   * @param config 配置信息Configuration
+   * @param config 配置信息 Configuration
    */
   public MapperMethod(Class<?> mapperInterface, Method method, Configuration config) {
     this.command = new SqlCommand(config, mapperInterface, method);
@@ -240,7 +239,6 @@ public class MapperMethod {
   }
 
   public static class SqlCommand {
-
     // SQL语句的名称
     private final String name;
     // SQL语句的种类，一共分为以下六种：增、删、改、查、清缓存、未知
@@ -287,7 +285,7 @@ public class MapperMethod {
      * @return MappedStatement对象
      */
     private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
-        Class<?> declaringClass, Configuration configuration) {
+                                                   Class<?> declaringClass, Configuration configuration) {
       // 数据库操作语句的编号是：接口名.方法名
       String statementId = mapperInterface.getName() + "." + methodName;
       // configuration保存了解析后的所有操作语句，去查找该语句
@@ -314,7 +312,7 @@ public class MapperMethod {
 
   public static class MethodSignature {
 
-    // 返回类型是否为集合类型
+    // 返回类型是否为多个结果
     private final boolean returnsMany;
     // 返回类型是否是map
     private final boolean returnsMap;

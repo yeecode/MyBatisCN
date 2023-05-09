@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 /**
  * 我们可以通过MetaObject对象解析复杂的表达式来对提供的对象进行操作
  */
-public class MetaObjectTest {
+class MetaObjectTest {
 
     @Test
-    public void testShouldGetAndSetField() {
+    void testShouldGetAndSetField() {
         MetaObjectBean metaObjectBean = new MetaObjectBean();
         MetaObject metaObject = SystemMetaObject.forObject(metaObjectBean);
         String value = "张三";
