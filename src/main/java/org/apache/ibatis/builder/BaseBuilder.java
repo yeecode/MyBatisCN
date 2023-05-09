@@ -47,6 +47,8 @@ public abstract class BaseBuilder {
     return configuration;
   }
 
+
+
   /*************数值读取器模块，开始*************/
   // 创建了一个支持默认值的读取器
   protected Pattern parseExpression(String regex, String defaultValue) {
@@ -68,6 +70,8 @@ public abstract class BaseBuilder {
     return new HashSet<>(Arrays.asList(value.split(",")));
   }
   /*************数值读取器模块，结束*************/
+
+
 
   /************字符串转Enum类型，开始*************/
   // 字符串转enum
@@ -112,6 +116,8 @@ public abstract class BaseBuilder {
   /*************字符串转enum，结束*************/
 
 
+
+
   /*************根据别名创建实例，开始*************/
   //根据别名解析Class，然后创建实例
   protected Object createInstance(String alias) {
@@ -141,7 +147,9 @@ public abstract class BaseBuilder {
 
   /*************根据别名创建实例，结束*************/
 
-  /*************根据别名创建handler，开始*************/
+
+
+  /*************根据别名创建 handler，开始 *************/
   // 查询时，javaType无用，除非是根据typeHandlerAlias没找到，准备新创建一个时使用。
   protected TypeHandler<?> resolveTypeHandler(Class<?> javaType, String typeHandlerAlias) {
     if (typeHandlerAlias == null) {
@@ -169,7 +177,9 @@ public abstract class BaseBuilder {
     }
     return handler;
   }
-  /*************根据别名创建handler，结束*************/
+  /*************根据别名创建 handler，结束 *************/
+
+
 
   protected <T> Class<? extends T> resolveAlias(String alias) {
     return typeAliasRegistry.resolveAlias(alias);

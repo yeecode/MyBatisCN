@@ -18,11 +18,8 @@ package org.apache.ibatis.builder;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ *  缓存引用解析器: 包含了被解析的对象 cacheRefNamespace 和对应的解析器 MapperBuilderAssistant 因此具有自解析功能。
  * @author Clinton Begin
- *
- * 缓存引用解析器
- *
- * 包含了被解析的对象cacheRefNamespace 和对应的解析器MapperBuilderAssistant 因此具有自解析功能。
  */
 public class CacheRefResolver {
   // Mapper建造者辅助类
