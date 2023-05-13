@@ -49,7 +49,7 @@ public abstract class BaseBuilder {
 
 
 
-  /*************数值读取器模块，开始*************/
+  /*************数值读取器模块，开始 *************/
   // 创建了一个支持默认值的读取器
   protected Pattern parseExpression(String regex, String defaultValue) {
     return Pattern.compile(regex == null ? defaultValue : regex);
@@ -73,7 +73,7 @@ public abstract class BaseBuilder {
 
 
 
-  /************字符串转Enum类型，开始*************/
+  /************字符串转 Enum 类型，开始*************/
   // 字符串转enum
   //解析JdbcType
   protected JdbcType resolveJdbcType(String alias) {

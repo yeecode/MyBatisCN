@@ -39,6 +39,14 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 /**
+ * MapperMethod 是 MyBatis 中的一个类，它用于表示一个 Mapper 接口中的一个映射方法。每个 Mapper 接口中的方法都会被封装成一个 MapperMethod 对象，用于在执行 SQL 时获取该方法的相关信息。
+ *
+ * MapperMethod 中包含了一些重要的属性，如：
+ * - SqlCommand：表示该映射方法对应的 SQL 语句。
+ * - MethodSignature：表示该映射方法的签名信息，包括方法名、参数类型、返回值类型等。
+ *
+ * 在执行 Mapper 接口中的映射方法时，MyBatis 会根据 MapperMethod 中的信息来进行 SQL 语句的解析和执行，最终将结果映射到对应的返回值中。
+ * 总之，MapperMethod 是 MyBatis 中非常重要的一个类，它是实现 Mapper 接口中的映射方法的关键。
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
@@ -46,9 +54,9 @@ import org.apache.ibatis.session.SqlSession;
  */
 public class MapperMethod {
 
-  // 记录了sql的名称和类型
+  // 表示该映射方法对应的 SQL 语句
   private final SqlCommand command;
-  // 对应的方法签名
+  // 表示该映射方法的签名信息，包括方法名、参数类型、返回值类型等。
   private final MethodSignature method;
 
 
@@ -238,6 +246,15 @@ public class MapperMethod {
     }
   }
 
+
+  /**
+   * SqlCommand 是 MyBatis 中的一个类，用于表示一个 Mapper 接口中的一个 SQL 语句。每个 Mapper 接口中的方法都会对应一个 SqlCommand 对象，用于描述该方法所对应的 SQL 语句。
+   *
+   * SqlCommand 中包含了一些重要的属性，如：statementType：表示该 SQL 语句的类型，如 SELECT、INSERT、UPDATE、DELETE 等。
+   *
+   * 在执行 Mapper 接口中的映射方法时，MyBatis 会根据 SqlCommand 中的信息来进行 SQL 语句的解析和执行，最终将结果映射到对应的返回值中。
+   * 总之，SqlCommand 是 MyBatis 中非常重要的一个类，它用于描述 Mapper 接口中的 SQL 语句，是实现 SQL 语句执行的关键。
+   */
   public static class SqlCommand {
     // SQL语句的名称
     private final String name;
@@ -247,17 +264,15 @@ public class MapperMethod {
     public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
       // 方法名称
       final String methodName = method.getName();
-      // 方法所在的类。可能是mapperInterface，也可能是mapperInterface的子类
+      // 方法所在的类，可能是 mapperInterface，也可能是 mapperInterface 的子类
       final Class<?> declaringClass = method.getDeclaringClass();
-      MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass,
-          configuration);
+      MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass, configuration);
       if (ms == null) {
         if (method.getAnnotation(Flush.class) != null) {
           name = null;
           type = SqlCommandType.FLUSH;
         } else {
-          throw new BindingException("Invalid bound statement (not found): "
-              + mapperInterface.getName() + "." + methodName);
+          throw new BindingException("Invalid bound statement (not found): " + mapperInterface.getName() + "." + methodName);
         }
       } else {
         name = ms.getId();
@@ -284,11 +299,13 @@ public class MapperMethod {
      * @param configuration 配置信息
      * @return MappedStatement对象
      */
-    private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
-                                                   Class<?> declaringClass, Configuration configuration) {
+    private MappedStatement resolveMappedStatement(Class<?> mapperInterface,
+                                                   String methodName,
+                                                   Class<?> declaringClass,
+                                                   Configuration configuration) {
       // 数据库操作语句的编号是：接口名.方法名
       String statementId = mapperInterface.getName() + "." + methodName;
-      // configuration保存了解析后的所有操作语句，去查找该语句
+      // configuration 保存了解析后的所有操作语句，去查找该语句
       if (configuration.hasStatement(statementId)) {
         // 从configuration中找到了对应的语句，返回
         return configuration.getMappedStatement(statementId);
@@ -299,8 +316,7 @@ public class MapperMethod {
       // 从方法的定义类开始，沿着父类向上寻找。找到接口类时停止
       for (Class<?> superInterface : mapperInterface.getInterfaces()) {
         if (declaringClass.isAssignableFrom(superInterface)) {
-          MappedStatement ms = resolveMappedStatement(superInterface, methodName,
-              declaringClass, configuration);
+          MappedStatement ms = resolveMappedStatement(superInterface, methodName, declaringClass, configuration);
           if (ms != null) {
             return ms;
           }
@@ -309,6 +325,8 @@ public class MapperMethod {
       return null;
     }
   }
+
+
 
   public static class MethodSignature {
 

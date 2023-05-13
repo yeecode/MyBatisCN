@@ -29,28 +29,20 @@ import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.session.Configuration;
 
 /**
+ * MappedStatement 是 MyBatis 中的一个类，用于表示一个 Mapper 接口中的一个映射语句。每个 Mapper 接口中的方法都会被封装成一个 MappedStatement 对象，用于在执行 SQL 语句时获取该方法的相关信息。
+ * 在执行 Mapper 接口中的映射方法时，MyBatis 会根据 MappedStatement 中的信息来进行 SQL 语句的解析和执行，最终将结果映射到对应的返回值中。
+ * 总之，MappedStatement 是 MyBatis 中非常重要的一个类，它用于表示 Mapper 接口中的映射语句，是实现 SQL 语句执行的关键。
+ *
  * @author Clinton Begin
- * 映射的语句
- *
- *
- * 该对象完整的表述出一个下面节点的信息
- *
- *      <insert id="addUser" parameterType="User">
- *         INSERT INTO `user`
- *         (`name`,`email`,`age`,`sex`,`schoolName`)
- *         VALUES
- *         (#{name},#{email},#{age},#{sex},#{schoolName})
- *     </insert>
- *
- *   但是这里面的
  */
 public final class MappedStatement {
   // Mapper文件的磁盘路径
   private String resource;
-  // Configuration对象
+  // Configuration 对象
   private Configuration configuration;
-  // 查询语句的完整包名加方法名，例如：com.github.yeecode.mybatisdemo.dao.UserMapper.addUser
+  // (MappedStatement 的唯一标识符) 查询语句的完整包名加方法名，例如：com.github.yeecode.mybatisdemo.dao.UserMapper.addUser
   private String id;
+  // 表示该 MappedStatement 返回结果集的大小
   private Integer fetchSize;
   private Integer timeout;
   private StatementType statementType;
@@ -60,8 +52,7 @@ public final class MappedStatement {
   private Cache cache;
   // 参数们
   private ParameterMap parameterMap;
-  // 输出的resultMap放在这里，我们在设置resultMap="UserBean" 时可以设置多个，即resultMap="UserBean，RoleBean"。
-  // 因此这里是一个list
+  // 输出的 resultMap 放在这里，在设置resultMap="UserBean" 时可以设置多个，即resultMap="UserBean,RoleBean"。因此这里是一个list
   private List<ResultMap> resultMaps;
   // 执行该语句前是否清除一二级缓存
   private boolean flushCacheRequired;

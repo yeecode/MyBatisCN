@@ -29,14 +29,14 @@ import org.apache.ibatis.session.SqlSession;
  * @author Clinton Begin
  * @author Eduardo Macarron
  *
- * 参见代理模式，这是代理类本身，通过invoke方法代理被代理对象的操作
+ * 参见代理模式，这是代理类本身，通过 invoke 方法代理被代理对象的操作
  *
  */
 public class MapperProxy<T> implements InvocationHandler, Serializable {
   private static final long serialVersionUID = -6424540398559729838L;
   private final SqlSession sqlSession;
   private final Class<T> mapperInterface;
-  // 该Map的键为方法，值为MapperMethod对象。通过该属性，完成了MapperProxy内（即映射接口内）方法和MapperMethod的绑定
+  // 该 Map 的键为方法，值为 MapperMethod 对象。通过该属性，完成了 MapperProxy 内 方法和 MapperMethod 的绑定
   private final Map<Method, MapperMethod> methodCache;
 
   public MapperProxy(SqlSession sqlSession, Class<T> mapperInterface, Map<Method, MapperMethod> methodCache) {
@@ -51,6 +51,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
       if (Object.class.equals(method.getDeclaringClass())) { // 继承自Object的方法
         // 直接执行原有方法
         return method.invoke(this, args);
+
       } else if (method.isDefault()) { // 默认方法
         // 执行默认方法
         return invokeDefaultMethod(proxy, method, args);
@@ -58,7 +59,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     } catch (Throwable t) {
       throw ExceptionUtil.unwrapThrowable(t);
     }
-    // 找对对应的 MapperMethod 对象
+    // 找到对应的 MapperMethod 对象
     final MapperMethod mapperMethod = cachedMapperMethod(method);
     // 调用 MapperMethod中的execute 方法
     return mapperMethod.execute(sqlSession, args);

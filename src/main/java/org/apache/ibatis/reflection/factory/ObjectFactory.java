@@ -19,8 +19,17 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * MyBatis uses an ObjectFactory to create all needed new Objects.
+ * ObjectFactory 主要作用是创建 Java 对象实例。
+ * 在 MyBatis中，每次查询都会创建一个新的结果对象实例，这就需要 ObjectFactory 类来创建这些实例。ObjectFactory 类通过反射创建 Java 对象实例，同时可以根据需要自定义创建对象的方式。
  *
+ * ObjectFactory 接口有两个主要方法：
+ * - create(Class type)：用于创建指定类型的对象实例。
+ * - setProperties(Properties properties)：用于设置 ObjectFactory 的属性。
+
+ * 除了这两个方法之外，ObjectFactory类还有其他一些方法，例如isCollection()和isMap()等，这些方法可以用于判断对象是否是集合或映射类型。
+ * 在MyBatis中，默认使用DefaultObjectFactory类来创建Java对象实例。如果需要自定义创建对象的方式，可以实现ObjectFactory接口，并将自定义的ObjectFactory类配置到MyBatis的配置文件中。
+ *
+ * MyBatis uses an ObjectFactory to create all needed new Objects.
  * @author Clinton Begin
  * 对象工厂
  */
