@@ -34,11 +34,10 @@ import org.apache.ibatis.session.SqlSession;
  * 它被 Configuration 持有，存着
  */
 public class MapperRegistry {
-
   private final Configuration config;
   // 已知的所有映射
-  // key: mapperInterface,即dao的数据库接口，不是方法
-  // value:MapperProxyFactory, 即映射器代理工厂
+  // key: mapperInterface, 即dao的数据库接口，不是方法
+  // value: MapperProxyFactory, 即映射器代理工厂
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
   public MapperRegistry(Configuration config) {
@@ -60,7 +59,7 @@ public class MapperRegistry {
       throw new BindingException("Type " + type + " is not known to the MapperRegistry.");
     }
     try {
-      // 通过mapperProxyFactory给出对应代理器的实例
+      // 通过 mapperProxyFactory 给出对应代理器的实例
       return mapperProxyFactory.newInstance(sqlSession);
     } catch (Exception e) {
       throw new BindingException("Error getting mapper instance. Cause: " + e, e);
@@ -108,7 +107,7 @@ public class MapperRegistry {
    * @since 3.2.2
    */
   public void addMappers(String packageName, Class<?> superType) {
-    // `ResolverUtil`是一个能够筛选出某个路径下满足指定条件的所有类的工具类
+    // ResolverUtil 是一个能够筛选出某个路径下满足指定条件的所有类的工具类
     ResolverUtil<Class<?>> resolverUtil = new ResolverUtil<>();
     // 筛选出某个包下Object的子类，其实就是包下所有类
     resolverUtil.find(new ResolverUtil.IsA(superType), packageName);

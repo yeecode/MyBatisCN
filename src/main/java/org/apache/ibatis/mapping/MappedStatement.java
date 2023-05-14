@@ -29,10 +29,8 @@ import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.session.Configuration;
 
 /**
- * MappedStatement 是 MyBatis 中的一个类，用于表示一个 Mapper 接口中的一个映射语句。每个 Mapper 接口中的方法都会被封装成一个 MappedStatement 对象，用于在执行 SQL 语句时获取该方法的相关信息。
- * 在执行 Mapper 接口中的映射方法时，MyBatis 会根据 MappedStatement 中的信息来进行 SQL 语句的解析和执行，最终将结果映射到对应的返回值中。
- * 总之，MappedStatement 是 MyBatis 中非常重要的一个类，它用于表示 Mapper 接口中的映射语句，是实现 SQL 语句执行的关键。
- *
+ * MappedStatement 是 MyBatis 中的一个重要概念，它是描述SQL语句相关信息的类。
+ * 每个 MappedStatement 对象对应于一个SQL语句，并包含了该SQL语句的详细信息，包括SQL语句本身、参数映射信息、结果映射信息等。
  * @author Clinton Begin
  */
 public final class MappedStatement {
@@ -47,7 +45,7 @@ public final class MappedStatement {
   private Integer timeout;
   private StatementType statementType;
   private ResultSetType resultSetType;
-  //SQL源码，对应于我们所写在配置文件中的SQL语句。包含占位符，无法直接执行。可以展开分析就是分行的sql语句text。
+  // SQL源码，对应于我们所写在配置文件中的SQL语句。包含占位符，无法直接执行。可以展开分析就是分行的sql语句text。
   private SqlSource sqlSource;
   private Cache cache;
   // 参数们
