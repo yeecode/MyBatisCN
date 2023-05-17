@@ -36,8 +36,7 @@ import org.apache.ibatis.session.SqlSession;
 public class MapperRegistry {
   private final Configuration config;
   // 已知的所有映射
-  // key: mapperInterface, 即dao的数据库接口，不是方法
-  // value: MapperProxyFactory, 即映射器代理工厂
+  // key: mapperInterface, value: MapperProxyFactory, 即映射器代理工厂
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
   public MapperRegistry(Configuration config) {
