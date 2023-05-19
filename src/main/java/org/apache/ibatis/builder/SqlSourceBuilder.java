@@ -31,7 +31,7 @@ import org.apache.ibatis.type.JdbcType;
 /**
  * @author Clinton Begin
  *
- * SqlSource的解析器
+ * SqlSource 的解析器
  *
  */
 public class SqlSourceBuilder extends BaseBuilder {

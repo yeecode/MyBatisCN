@@ -64,7 +64,7 @@ public abstract class BaseBuilder {
     return value == null ? defaultValue : Integer.valueOf(value);
   }
 
-  //把以逗号分割的一个字符串重新包装，返回一个Set
+  // 把以逗号分割的一个字符串重新包装，返回一个Set
   protected Set<String> stringSetValueOf(String value, String defaultValue) {
     value = value == null ? defaultValue : value;
     return new HashSet<>(Arrays.asList(value.split(",")));
@@ -88,7 +88,7 @@ public abstract class BaseBuilder {
   }
 
   // 字符串转enum
-  //解析ResultSetType
+  // 解析ResultSetType
   protected ResultSetType resolveResultSetType(String alias) {
     if (alias == null) {
       return null;

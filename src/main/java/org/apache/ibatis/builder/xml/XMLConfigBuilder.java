@@ -51,7 +51,6 @@ import org.apache.ibatis.type.JdbcType;
  * @author Kazuki Shimizu
  */
 public class XMLConfigBuilder extends BaseBuilder {
-
   // 存储是否已经对config文件完成解析
   private boolean parsed;
   // 解析器
