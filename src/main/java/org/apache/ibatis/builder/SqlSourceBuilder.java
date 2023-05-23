@@ -31,7 +31,7 @@ import org.apache.ibatis.type.JdbcType;
 /**
  * @author Clinton Begin
  *
- * SqlSource的解析器
+ * SqlSource 的解析器
  *
  */
 public class SqlSourceBuilder extends BaseBuilder {
@@ -45,9 +45,8 @@ public class SqlSourceBuilder extends BaseBuilder {
 
 
   // 这里解析的对象是SqlNode拼接结束的，即<if> <where>等节点的结果都已经解析结束。然后在这里继续处理
-
   /**
-   * 将DynamicSqlSource和RawSqlSource中的“#{}”符号替换掉，从而将他们转化为StaticSqlSource
+   * 将 DynamicSqlSource 和 RawSqlSource 中的 “#{}” 符号替换掉，从而将他们转化为 StaticSqlSource。
    * @param originalSql sqlNode.apply()拼接之后的sql语句。已经不包含<if> <where>等节点，也不含有${}符号
    * @param parameterType 实参类型
    * @param additionalParameters 附加参数
@@ -67,7 +66,6 @@ public class SqlSourceBuilder extends BaseBuilder {
   // 用以替换占位符的处理器
   // 用来处理形如#｛ id, javaType= int, jdbcType=NUMERIC, typeHandler=DemoTypeHandler ｝
   private static class ParameterMappingTokenHandler extends BaseBuilder implements TokenHandler {
-
     // 每个#{}中的东西对应一个ParameterMapping。所有的#{}都放在这个list
     private List<ParameterMapping> parameterMappings = new ArrayList<>();
     // 参数类型

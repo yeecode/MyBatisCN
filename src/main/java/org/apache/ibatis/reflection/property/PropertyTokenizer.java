@@ -18,15 +18,12 @@ package org.apache.ibatis.reflection.property;
 import java.util.Iterator;
 
 /**
- * @author Clinton Begin
+ *
  * 属性标记器
- */
-
-/**
  * 假设传入的为student[sId].name
  * 则各个属性得到以下结果
- *
  * 该属性标记器只能处理一级，即点后面的都作为children
+ * @author Clinton Begin
  */
 public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
 

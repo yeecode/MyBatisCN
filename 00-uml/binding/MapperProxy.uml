@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.apache.ibatis.binding.MapperProxy</OriginalElement>
+  <nodes>
+    <node x="514.7962222307515" y="-67.92888727965571">java.lang.reflect.InvocationHandler</node>
+    <node x="748.0322521794384" y="148.6016648769122">org.apache.ibatis.binding.MapperProxy</node>
+    <node x="308.8554573754389" y="244.34098961520294">org.apache.ibatis.binding.MapperMethod</node>
+    <node x="-143.88536438411688" y="415.47857637026027">org.apache.ibatis.binding.MapperRegistry</node>
+    <node x="-106.38536438411688" y="82.99828724715034">org.apache.ibatis.binding.MapperProxyFactory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.apache.ibatis.binding.MapperProxy" target="org.apache.ibatis.binding.MapperMethod" relationship="CREATE">
+      <point x="-170.0" y="41.31463993404389" />
+      <point x="541.1698003646981" y="254.4163048109561" />
+      <point x="541.1698003646981" y="284.84098961520294" />
+      <point x="103.99999999999999" y="0.0" />
+    </edge>
+    <edge source="org.apache.ibatis.binding.MapperProxyFactory" target="org.apache.ibatis.binding.MapperMethod" relationship="TO_MANY">
+      <point x="170.0003643841169" y="-2.872471503438945E-4" />
+      <point x="264.0" y="123.498" />
+      <point x="264.0" y="284.84054479097546" />
+      <point x="-103.99975332766182" y="-4.448242274648351E-4" />
+    </edge>
+    <edge source="org.apache.ibatis.binding.MapperProxy" target="java.lang.reflect.InvocationHandler" relationship="REALIZATION">
+      <point x="-154.37405251006692" y="-64.5" />
+      <point x="763.6581996693715" y="42.29723816823673" />
+      <point x="609.7962222307515" y="42.29723816823673" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.apache.ibatis.binding.MapperRegistry" target="org.apache.ibatis.binding.MapperProxyFactory" relationship="CREATE">
+      <point x="0.0" y="-40.5" />
+      <point x="0.0" y="40.500000000000014" />
+    </edge>
+    <edge source="org.apache.ibatis.binding.MapperProxy" target="org.apache.ibatis.binding.MapperMethod" relationship="TO_MANY">
+      <point x="-169.9998474017342" y="-16.685804890183576" />
+      <point x="264.0" y="196.4158599867286" />
+      <point x="264.0" y="284.84054479097546" />
+      <point x="-103.99975332766182" y="-4.448242274648351E-4" />
+    </edge>
+    <edge source="org.apache.ibatis.binding.MapperProxyFactory" target="org.apache.ibatis.binding.MapperProxy" relationship="CREATE">
+      <point x="170.0" y="-15.000287247150347" />
+      <point x="406.9382415088087" y="108.49799999999999" />
+      <point x="406.9382415088087" y="177.1708599867286" />
+      <point x="-170.0" y="-35.93080489018358" />
+    </edge>
+    <edge source="org.apache.ibatis.binding.MapperRegistry" target="org.apache.ibatis.binding.MapperProxyFactory" relationship="TO_MANY">
+      <point x="15.0" y="-40.5" />
+      <point x="15.0" y="40.500000000000014" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.150381679389313" showDependencies="true" x="519.8666224286662" y="214.0700066357001" />
+  <SelectedNodes>
+    <node>org.apache.ibatis.binding.MapperRegistry</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

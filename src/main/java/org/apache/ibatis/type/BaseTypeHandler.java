@@ -24,6 +24,9 @@ import org.apache.ibatis.executor.result.ResultMapException;
 import org.apache.ibatis.session.Configuration;
 
 /**
+ * 用于引用泛型类型的基本 TypeHandler。
+ * 重要提示：自 3.5.0 起，此类从不调用ResultSet.wasNull()和CallableStatement.wasNull()方法来处理 SQL NULL值。换句话说， null值处理应该在子类上进行。
+ *
  * The base {@link TypeHandler} for references a generic type.
  * <p>
  * Important: Since 3.5.0, This class never call the {@link ResultSet#wasNull()} and
@@ -60,17 +63,13 @@ public abstract class BaseTypeHandler<T> extends TypeReference<T> implements Typ
       try {
         ps.setNull(i, jdbcType.TYPE_CODE);
       } catch (SQLException e) {
-        throw new TypeException("Error setting null for parameter #" + i + " with JdbcType " + jdbcType + " . "
-              + "Try setting a different JdbcType for this parameter or a different jdbcTypeForNull configuration property. "
-              + "Cause: " + e, e);
+        throw new TypeException("Error setting null for parameter #" + i + " with JdbcType " + jdbcType + " . " + "Try setting a different JdbcType for this parameter or a different jdbcTypeForNull configuration property. " + "Cause: " + e, e);
       }
     } else {
       try {
         setNonNullParameter(ps, i, parameter, jdbcType);
       } catch (Exception e) {
-        throw new TypeException("Error setting non null for parameter #" + i + " with JdbcType " + jdbcType + " . "
-              + "Try setting a different JdbcType for this parameter or a different configuration property. "
-              + "Cause: " + e, e);
+        throw new TypeException("Error setting non null for parameter #" + i + " with JdbcType " + jdbcType + " . " + "Try setting a different JdbcType for this parameter or a different configuration property. " + "Cause: " + e, e);
       }
     }
   }
@@ -109,9 +108,13 @@ public abstract class BaseTypeHandler<T> extends TypeReference<T> implements Typ
     }
   }
 
+  /**
+   * 向 PreparedStatement 对象中的指定变量位置写入一个不为 null 的值。
+   */
   public abstract void setNonNullParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException;
 
   /**
+   * 从 ResultSet 中按照字段名读出一个可能为 null 的数据。
    * @param columnName Colunm name, when configuration <code>useColumnLabel</code> is <code>false</code>
    */
   public abstract T getNullableResult(ResultSet rs, String columnName) throws SQLException;

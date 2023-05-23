@@ -26,9 +26,9 @@ import org.apache.ibatis.session.SqlSession;
  * @author Lasse Voss
  */
 public class MapperProxyFactory<T> {
-
-  // 对应SQL的java接口类
+  // 对应 SQL 的 java 接口类
   private final Class<T> mapperInterface;
+  // 该 Map 的键为方法，值为 MapperMethod 对象。通过该属性，完成了 MapperProxy 内方法和 MapperMethod 的绑定
   private final Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<>();
 
   /**
@@ -49,9 +49,12 @@ public class MapperProxyFactory<T> {
 
   @SuppressWarnings("unchecked")
   protected T newInstance(MapperProxy<T> mapperProxy) {
-    // 三个参数分别是：
-    // 创建代理对象的类加载器、要代理的接口、代理类的处理器（即具体的实现）。
-    return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
+    // 创建代理实例
+    return (T) Proxy.newProxyInstance(
+            mapperInterface.getClassLoader(), // 被代理对象的类加载器
+            new Class[] { mapperInterface }, // 被代理的接口
+            mapperProxy // 代理类的处理器(即具体的实现)
+    );
   }
 
   public T newInstance(SqlSession sqlSession) {

@@ -56,7 +56,7 @@ public class SqlSessionFactoryBuilder {
       // 传入配置文件，创建一个XMLConfigBuilder类
       XMLConfigBuilder parser = new XMLConfigBuilder(reader, environment, properties);
       // 分两步：
-      // 1、解析配置文件，得到配置文件对应的Configuration对象
+      // 1、解析配置文件，得到配置文件对应的Configuration对象( parser.parse() )
       // 2、根据Configuration对象，获得一个DefaultSqlSessionFactory
       return build(parser.parse());
     } catch (Exception e) {

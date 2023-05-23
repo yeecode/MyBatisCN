@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
+ * 一个类来包装对多个类加载器的访问，使它们作为一个类加载器工作
+ *
  * A class to wrap access to multiple class loaders making them work as one
  *
  * @author Clinton Begin
@@ -79,8 +81,9 @@ public class ClassLoaderWrapper {
   }
 
   /**
-   * Find a class on the classpath (or die trying)
+   * 在类路径上找到一个类（或死于尝试）
    *
+   * Find a class on the classpath (or die trying)
    * @param name - the class to look for
    * @return - the class
    * @throws ClassNotFoundException Duh.
@@ -113,6 +116,7 @@ public class ClassLoaderWrapper {
       if (null != cl) {
 
         // try to find the resource as passed
+        // 尝试找到传递的资源
         InputStream returnValue = cl.getResourceAsStream(resource);
 
         // now, some class loaders want this leading "/", so we'll add it and try again if we didn't find the resource
@@ -167,14 +171,7 @@ public class ClassLoaderWrapper {
 
   }
 
-  /**
-   * Attempt to load a class from a group of classloaders
-   *
-   * @param name        - the class to load
-   * @param classLoader - the group of classloaders to examine
-   * @return the class
-   * @throws ClassNotFoundException - Remember the wisdom of Judge Smails: Well, the world needs ditch diggers, too.
-   */
+
   /**
    * 轮番使用各个加载器尝试加载一个类
    * @param name 类名

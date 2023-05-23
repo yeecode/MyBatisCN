@@ -50,6 +50,8 @@ public class ParamNameResolver {
 
   // 方法入参的参数次序表。键为参数次序，值为参数名称或者参数@Param注解的值
   private final SortedMap<Integer, String> names;
+
+
   // 该方法入参中是否含有@Param注解
   private boolean hasParamAnnotation;
 

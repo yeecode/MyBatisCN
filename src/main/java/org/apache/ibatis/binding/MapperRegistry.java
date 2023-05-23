@@ -31,14 +31,12 @@ import org.apache.ibatis.session.SqlSession;
  * @author Eduardo Macarron
  * @author Lasse Voss
  *
- * 它被Configuration持有，存着
+ * 它被 Configuration 持有，存着
  */
 public class MapperRegistry {
-
   private final Configuration config;
   // 已知的所有映射
-  // key:mapperInterface,即dao的数据库接口，不是方法
-  // value:MapperProxyFactory,即映射器代理工厂
+  // key: mapperInterface, value: MapperProxyFactory, 即映射器代理工厂
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
   public MapperRegistry(Configuration config) {
@@ -60,7 +58,7 @@ public class MapperRegistry {
       throw new BindingException("Type " + type + " is not known to the MapperRegistry.");
     }
     try {
-      // 通过mapperProxyFactory给出对应代理器的实例
+      // 通过 mapperProxyFactory 给出对应代理器的实例
       return mapperProxyFactory.newInstance(sqlSession);
     } catch (Exception e) {
       throw new BindingException("Error getting mapper instance. Cause: " + e, e);
@@ -82,6 +80,7 @@ public class MapperRegistry {
       boolean loadCompleted = false;
       try {
         knownMappers.put(type, new MapperProxyFactory<>(type));
+        // 在解析器运行之前添加类型很重要，否则映射器解析器可能会自动尝试绑定。如果类型已知，则不会尝试。
         // It's important that the type is added before the parser is run
         // otherwise the binding may automatically be attempted by the
         // mapper parser. If the type is already known, it won't try.
@@ -107,7 +106,7 @@ public class MapperRegistry {
    * @since 3.2.2
    */
   public void addMappers(String packageName, Class<?> superType) {
-    // `ResolverUtil`是一个能够筛选出某个路径下满足指定条件的所有类的工具类
+    // ResolverUtil 是一个能够筛选出某个路径下满足指定条件的所有类的工具类
     ResolverUtil<Class<?>> resolverUtil = new ResolverUtil<>();
     // 筛选出某个包下Object的子类，其实就是包下所有类
     resolverUtil.find(new ResolverUtil.IsA(superType), packageName);

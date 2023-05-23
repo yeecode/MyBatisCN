@@ -29,9 +29,6 @@ import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
- * @author Clinton Begin
- */
-/**
  * 构建器的基类，建造者模式
  *
  */
@@ -50,7 +47,9 @@ public abstract class BaseBuilder {
     return configuration;
   }
 
-  /*************数值读取器模块，开始*************/
+
+
+  /*************数值读取器模块，开始 *************/
   // 创建了一个支持默认值的读取器
   protected Pattern parseExpression(String regex, String defaultValue) {
     return Pattern.compile(regex == null ? defaultValue : regex);
@@ -65,14 +64,16 @@ public abstract class BaseBuilder {
     return value == null ? defaultValue : Integer.valueOf(value);
   }
 
-  //把以逗号分割的一个字符串重新包装，返回一个Set
+  // 把以逗号分割的一个字符串重新包装，返回一个Set
   protected Set<String> stringSetValueOf(String value, String defaultValue) {
     value = value == null ? defaultValue : value;
     return new HashSet<>(Arrays.asList(value.split(",")));
   }
   /*************数值读取器模块，结束*************/
 
-  /************字符串转Enum类型，开始*************/
+
+
+  /************字符串转 Enum 类型，开始*************/
   // 字符串转enum
   //解析JdbcType
   protected JdbcType resolveJdbcType(String alias) {
@@ -87,7 +88,7 @@ public abstract class BaseBuilder {
   }
 
   // 字符串转enum
-  //解析ResultSetType
+  // 解析ResultSetType
   protected ResultSetType resolveResultSetType(String alias) {
     if (alias == null) {
       return null;
@@ -113,6 +114,8 @@ public abstract class BaseBuilder {
   }
 
   /*************字符串转enum，结束*************/
+
+
 
 
   /*************根据别名创建实例，开始*************/
@@ -144,7 +147,9 @@ public abstract class BaseBuilder {
 
   /*************根据别名创建实例，结束*************/
 
-  /*************根据别名创建handler，开始*************/
+
+
+  /*************根据别名创建 handler，开始 *************/
   // 查询时，javaType无用，除非是根据typeHandlerAlias没找到，准备新创建一个时使用。
   protected TypeHandler<?> resolveTypeHandler(Class<?> javaType, String typeHandlerAlias) {
     if (typeHandlerAlias == null) {
@@ -172,7 +177,9 @@ public abstract class BaseBuilder {
     }
     return handler;
   }
-  /*************根据别名创建handler，结束*************/
+  /*************根据别名创建 handler，结束 *************/
+
+
 
   protected <T> Class<? extends T> resolveAlias(String alias) {
     return typeAliasRegistry.resolveAlias(alias);

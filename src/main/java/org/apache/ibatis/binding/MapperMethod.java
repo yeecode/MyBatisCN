@@ -39,25 +39,31 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 /**
+ * MapperMethod 是 MyBatis 中的一个类，用于表示一个 Mapper 接口中的一个映射方法。
+ * 每个 Mapper 接口中的方法都会被封装成一个 MapperMethod 对象，用于在执行 SQL 时获取该方法的相关信息。
+ * 在执行 Mapper 接口中的映射方法时，MyBatis 会根据 MapperMethod 中的信息来进行 SQL 语句的解析和执行，最终将结果映射到对应的返回值中。
+ * 总之，MapperMethod 是 MyBatis 中非常重要的一个类，它是实现 Mapper 接口中的映射方法的关键。
+ *
+ * MapperMethod 中包含了一些重要的属性，如：
+ * - SqlCommand：表示该映射方法对应的 SQL 语句。
+ * - MethodSignature：表示该映射方法的签名信息，包括方法名、参数类型、返回值类型等。
+ *
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
  * @author Kazuki Shimizu
  */
 public class MapperMethod {
-
-  // 记录了sql的名称和类型
+  // 表示该映射方法对应的 SQL 语句
   private final SqlCommand command;
-  // 对应的方法签名
+  // 表示该映射方法的签名信息，包括方法名、参数类型、返回值类型等。
   private final MethodSignature method;
 
-  // 参数： 方法所在的接口、方法、Configuration
-
   /**
-   * MapperMethod的构造方法
+   * MapperMethod 的构造方法
    * @param mapperInterface 映射接口
    * @param method 映射接口中的具体方法
-   * @param config 配置信息Configuration
+   * @param config 配置信息 Configuration
    */
   public MapperMethod(Class<?> mapperInterface, Method method, Configuration config) {
     this.command = new SqlCommand(config, mapperInterface, method);
@@ -72,40 +78,57 @@ public class MapperMethod {
    */
   public Object execute(SqlSession sqlSession, Object[] args) {
     Object result;
-    switch (command.getType()) { // 根据SQL语句类型，执行不同操作
-      case INSERT: { // 如果是插入语句
+    // 根据SQL语句类型，执行不同操作
+    switch (command.getType()) {
+      // 如果是插入语句
+      case INSERT: {
         // 将参数顺序与实参对应好
         Object param = method.convertArgsToSqlCommandParam(args);
         // 执行操作并返回结果
         result = rowCountResult(sqlSession.insert(command.getName(), param));
         break;
       }
-      case UPDATE: { // 如果是更新语句
+
+      // 如果是更新语句
+      case UPDATE: {
         // 将参数顺序与实参对应好
         Object param = method.convertArgsToSqlCommandParam(args);
         // 执行操作并返回结果
         result = rowCountResult(sqlSession.update(command.getName(), param));
         break;
       }
-      case DELETE: { // 如果是删除语句MappedStatement
+
+      // 如果是删除语句
+      case DELETE: {
         // 将参数顺序与实参对应好
         Object param = method.convertArgsToSqlCommandParam(args);
         // 执行操作并返回结果
         result = rowCountResult(sqlSession.delete(command.getName(), param));
         break;
       }
-      case SELECT: // 如果是查询语句
-        if (method.returnsVoid() && method.hasResultHandler()) { // 方法返回值为void，且有结果处理器
+
+      // 如果是查询语句
+      case SELECT:
+        // 方法返回值为void，且有结果处理器
+        if (method.returnsVoid() && method.hasResultHandler()) {
           // 使用结果处理器执行查询
           executeWithResultHandler(sqlSession, args);
           result = null;
-        } else if (method.returnsMany()) { // 多条结果查询
+        }
+        // 多条结果查询
+        else if (method.returnsMany()) {
           result = executeForMany(sqlSession, args);
-        } else if (method.returnsMap()) { // Map结果查询
+        }
+        // Map结果查询
+        else if (method.returnsMap()) {
           result = executeForMap(sqlSession, args);
-        } else if (method.returnsCursor()) { // 游标类型结果查询
+        }
+        // 游标类型结果查询
+        else if (method.returnsCursor()) {
           result = executeForCursor(sqlSession, args);
-        } else { // 单条结果查询
+        }
+        // 单条结果查询
+        else {
           Object param = method.convertArgsToSqlCommandParam(args);
           result = sqlSession.selectOne(command.getName(), param);
           if (method.returnsOptional()
@@ -114,12 +137,17 @@ public class MapperMethod {
           }
         }
         break;
-      case FLUSH: // 清空缓存语句
+
+      // 清空缓存语句
+      case FLUSH:
         result = sqlSession.flushStatements();
         break;
-      default: // 未知语句类型，抛出异常
+
+      // 未知语句类型，抛出异常
+      default:
         throw new BindingException("Unknown execution method for: " + command.getName());
     }
+
     if (result == null && method.getReturnType().isPrimitive() && !method.returnsVoid()) {
       // 查询结果为null,但返回类型为基本类型。因此返回变量无法接收查询结果，抛出异常。
       throw new BindingException("Mapper method '" + command.getName()
@@ -239,27 +267,26 @@ public class MapperMethod {
     }
   }
 
-  public static class SqlCommand {
 
+  public static class SqlCommand {
     // SQL语句的名称
     private final String name;
-    // SQL语句的种类，一共分为以下六种：增、删、改、查、清缓存、未知
+    // SQL语句的类型，一共分为以下六种：增、删、改、查、清缓存、未知
     private final SqlCommandType type;
 
     public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
-      // 方法名称
+      // 方法名
       final String methodName = method.getName();
-      // 方法所在的类。可能是mapperInterface，也可能是mapperInterface的子类
+      // 方法声明的类，可能是 mapperInterface，也可能是 mapperInterface 的子类
       final Class<?> declaringClass = method.getDeclaringClass();
-      MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass,
-          configuration);
+      // 找出 指定接口指定方法 对应的 MappedStatement 对象
+      MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass, configuration);
       if (ms == null) {
         if (method.getAnnotation(Flush.class) != null) {
           name = null;
           type = SqlCommandType.FLUSH;
         } else {
-          throw new BindingException("Invalid bound statement (not found): "
-              + mapperInterface.getName() + "." + methodName);
+          throw new BindingException("Invalid bound statement (not found): " + mapperInterface.getName() + "." + methodName);
         }
       } else {
         name = ms.getId();
@@ -279,30 +306,35 @@ public class MapperMethod {
     }
 
     /**
-     * 找出指定接口指定方法对应的MappedStatement对象
+     * 从 configuration 中找出指定接口指定方法对应的 MappedStatement 对象
      * @param mapperInterface 映射接口
      * @param methodName 映射接口中具体操作方法名
      * @param declaringClass 操作方法所在的类。一般是映射接口本身，也可能是映射接口的子类
      * @param configuration 配置信息
      * @return MappedStatement对象
      */
-    private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
-        Class<?> declaringClass, Configuration configuration) {
+    private MappedStatement resolveMappedStatement(Class<?> mapperInterface,
+                                                   String methodName,
+                                                   Class<?> declaringClass,
+                                                   Configuration configuration) {
       // 数据库操作语句的编号是：接口名.方法名
       String statementId = mapperInterface.getName() + "." + methodName;
-      // configuration保存了解析后的所有操作语句，去查找该语句
+
+      // configuration 保存了解析后的所有操作语句，去查找该语句
       if (configuration.hasStatement(statementId)) {
-        // 从configuration中找到了对应的语句，返回
+        // 从 configuration 中找到了对应的语句并返回
         return configuration.getMappedStatement(statementId);
-      } else if (mapperInterface.equals(declaringClass)) {
+
+      }
+      else if (mapperInterface.equals(declaringClass)) {
         // 说明递归调用已经到终点，但是仍然没有找到匹配的结果
         return null;
       }
+
       // 从方法的定义类开始，沿着父类向上寻找。找到接口类时停止
       for (Class<?> superInterface : mapperInterface.getInterfaces()) {
         if (declaringClass.isAssignableFrom(superInterface)) {
-          MappedStatement ms = resolveMappedStatement(superInterface, methodName,
-              declaringClass, configuration);
+          MappedStatement ms = resolveMappedStatement(superInterface, methodName, declaringClass, configuration);
           if (ms != null) {
             return ms;
           }
@@ -312,9 +344,9 @@ public class MapperMethod {
     }
   }
 
+  // 方法签名
   public static class MethodSignature {
-
-    // 返回类型是否为集合类型
+    // 返回类型是否为多个结果
     private final boolean returnsMany;
     // 返回类型是否是map
     private final boolean returnsMap;

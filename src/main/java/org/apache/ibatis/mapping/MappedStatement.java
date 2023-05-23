@@ -29,39 +29,28 @@ import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.session.Configuration;
 
 /**
+ * MappedStatement 是 MyBatis 中的一个重要概念，它是描述SQL语句相关信息的类。
+ * 每个 MappedStatement 对象对应于一个SQL语句，并包含了该SQL语句的详细信息，包括SQL语句本身、参数映射信息、结果映射信息等。
  * @author Clinton Begin
- * 映射的语句
- *
- *
- * 该对象完整的表述出一个下面节点的信息
- *
- *      <insert id="addUser" parameterType="User">
- *         INSERT INTO `user`
- *         (`name`,`email`,`age`,`sex`,`schoolName`)
- *         VALUES
- *         (#{name},#{email},#{age},#{sex},#{schoolName})
- *     </insert>
- *
- *   但是这里面的
  */
 public final class MappedStatement {
   // Mapper文件的磁盘路径
   private String resource;
-  // Configuration对象
+  // Configuration 对象
   private Configuration configuration;
-  // 查询语句的完整包名加方法名，例如：com.github.yeecode.mybatisdemo.dao.UserMapper.addUser
+  // (MappedStatement 的唯一标识符) 查询语句的完整包名加方法名，例如：com.github.yeecode.mybatisdemo.dao.UserMapper.addUser
   private String id;
+  // 表示该 MappedStatement 返回结果集的大小
   private Integer fetchSize;
   private Integer timeout;
   private StatementType statementType;
   private ResultSetType resultSetType;
-  //SQL源码，对应于我们所写在配置文件中的SQL语句。包含占位符，无法直接执行。可以展开分析就是分行的sql语句text。
+  // SQL源码，对应于我们所写在配置文件中的SQL语句。包含占位符，无法直接执行。可以展开分析就是分行的sql语句text。
   private SqlSource sqlSource;
   private Cache cache;
   // 参数们
   private ParameterMap parameterMap;
-  // 输出的resultMap放在这里，我们在设置resultMap="UserBean" 时可以设置多个，即resultMap="UserBean，RoleBean"。
-  // 因此这里是一个list
+  // 输出的 resultMap 放在这里，在设置resultMap="UserBean" 时可以设置多个，即resultMap="UserBean,RoleBean"。因此这里是一个list
   private List<ResultMap> resultMaps;
   // 执行该语句前是否清除一二级缓存
   private boolean flushCacheRequired;

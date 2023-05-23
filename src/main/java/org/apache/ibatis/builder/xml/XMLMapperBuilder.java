@@ -105,7 +105,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   /**
-   * 解析Mapper文件
+   * 解析 Mapper 文件
    */
   public void parse() {
     // 该节点是否被解析过
