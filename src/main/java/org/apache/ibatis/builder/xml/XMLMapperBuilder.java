@@ -49,26 +49,11 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 
 /**
+ * 这是用来解析 Mapper 映射文件的建造者
  * @author Clinton Begin
  * @author Kazuki Shimizu
- *
- * 这是用来解析Mapper文件的建造者
- * <mappers>
- *    <mapper resource="com/example/demo/UserMapper.xml"/>
- * </mappers>
- *     中UserMapper.xml就是由他建造到configuration的mapper中的
- *
- *     即，它处理：
- * <mapper namespace="com.example.demo.UserDao">
- *   <cache eviction="FIFO" flushInterval="60000"/>
- *   <select id="selectUser" resultType="com.example.demo.UserBean">    -- 对应xxxx，由XMLMapperBuilder解析
- *       select * from `user` where id = #{id}
- *   </select>
- * </mapper>
- *
  */
 public class XMLMapperBuilder extends BaseBuilder {
-
   private final XPathParser parser;
   private final MapperBuilderAssistant builderAssistant;
   private final Map<String, XNode> sqlFragments;
