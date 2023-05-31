@@ -22,18 +22,15 @@ import org.apache.ibatis.executor.ErrorContext;
  */
 public class ExceptionFactory {
 
-  // 不允许实例化该类
   private ExceptionFactory() {
     // Prevent Instantiation
   }
 
-  // 静态方法，直接调用
-
   /**
-   * 生成一个RuntimeException异常
+   * 生成一个 RuntimeException 异常
    * @param message 异常信息
    * @param e 异常
-   * @return 新的RuntimeException异常
+   * @return 新的 RuntimeException 异常
    */
   public static RuntimeException wrapException(String message, Exception e) {
     return new PersistenceException(ErrorContext.instance().message(message).cause(e).toString(), e);

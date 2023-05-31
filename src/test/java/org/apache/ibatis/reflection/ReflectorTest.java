@@ -55,14 +55,11 @@ class ReflectorTest {
   }
 
   static abstract class AbstractEntity implements Entity<Long> {
-
     private Long id;
-
     @Override
     public Long getId() {
       return id;
     }
-
     @Override
     public void setId(Long id) {
       this.id = id;
@@ -172,7 +169,7 @@ class ReflectorTest {
   }
 
   @Test
-  void shouldResoleveReadonlySetterWithOverload() {
+  void shouldResolveReadonlySetterWithOverload() {
     class BeanClass implements BeanInterface<String> {
       @Override
       public void setId(String id) {
